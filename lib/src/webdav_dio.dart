@@ -157,11 +157,11 @@ class WdDio with DioMixin implements Dio {
 
   // PROPFIND
   Future<Response> wdPropfind(
-      Client self, String path, bool depth, String dataStr,
+      Client self, String path, String depth, String dataStr,
       {CancelToken? cancelToken}) async {
     var resp = await this.req(self, 'PROPFIND', path, data: dataStr,
         optionsHandler: (options) {
-      options.headers?['depth'] = depth ? '1' : '0';
+      options.headers?['depth'] = depth;
       options.headers?['content-type'] = 'application/xml;charset=UTF-8';
       options.headers?['accept'] = 'application/xml,text/xml';
       options.headers?['accept-charset'] = 'utf-8';
