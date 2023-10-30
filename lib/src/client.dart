@@ -75,11 +75,11 @@ class Client {
   Future<List<File>> findFiles(String path, String depth, String pattern,
       [CancelToken? cancelToken]) async {
     path = fixSlashes(path);
-    var resp = await this.c.wdPropfind(
+    var resp = await this.c.wdSearch(
           this,
           path,
-          depth,
-          findXmlString(pattern),
+          true,
+          searchXmlString(pattern),
           cancelToken: cancelToken,
         );
 
