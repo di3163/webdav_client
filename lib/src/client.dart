@@ -61,7 +61,7 @@ class Client {
   // }
 
   /// Read all files in a folder
-  Future<List<File>> readDir(String path, bool depth,
+  Future<List<File>> readDir(String path, String depth,
       [CancelToken? cancelToken]) async {
     path = fixSlashes(path);
     var resp = await this
@@ -72,7 +72,7 @@ class Client {
     return WebdavXml.toFiles(path, str);
   }
 
-  Future<List<File>> findFiles(String path, bool depth, String pattern,
+  Future<List<File>> findFiles(String path, String depth, String pattern,
       [CancelToken? cancelToken]) async {
     path = fixSlashes(path);
     var resp = await this.c.wdPropfind(
@@ -92,7 +92,7 @@ class Client {
     path = fixSlashes(path);
     var resp = await this
         .c
-        .wdPropfind(this, path, true, fileXmlStr, cancelToken: cancelToken);
+        .wdPropfind(this, path, '1', fileXmlStr, cancelToken: cancelToken);
 
     String str = resp.data;
     return WebdavXml.toFiles(path, str, skipSelf: false).first;
